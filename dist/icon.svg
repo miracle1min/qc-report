@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0a0a0f"/>
+  <rect x="20" y="20" width="472" height="472" rx="80" fill="none" stroke="#00f7ff" stroke-width="4" opacity="0.3"/>
+  <text x="256" y="220" text-anchor="middle" font-family="system-ui" font-size="120" font-weight="900" fill="#00f7ff">QC</text>
+  <text x="256" y="340" text-anchor="middle" font-family="system-ui" font-size="60" font-weight="700" fill="#ff2bd6">REPORT</text>
+  <circle cx="256" cy="420" r="8" fill="#00f7ff" opacity="0.6"/>
+</svg>

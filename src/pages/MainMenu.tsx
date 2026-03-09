@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ChevronRight } from 'lucide-react';
+import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ThermometerSnowflake, ChevronRight } from 'lucide-react';
 import { FormType } from '../types';
 
 interface Props {
@@ -46,6 +46,14 @@ const MENU_ITEMS: { type: FormType; icon: React.ReactNode; title: string; subtit
     subtitle: 'Return Barang',
     gradient: 'linear-gradient(135deg, rgba(255,100,50,0.12) 0%, rgba(255,100,50,0.02) 100%)',
     accentColor: 'rgba(255,100,50,0.6)',
+  },
+  {
+    type: 'suhu_datalogger',
+    icon: <ThermometerSnowflake size={26} strokeWidth={1.8} />,
+    title: 'Suhu Data Logger',
+    subtitle: 'Chiller, Freezer & Cold Storage',
+    gradient: 'linear-gradient(135deg, rgba(100,180,255,0.12) 0%, rgba(100,180,255,0.02) 100%)',
+    accentColor: 'rgba(100,180,255,0.6)',
   },
 ];
 

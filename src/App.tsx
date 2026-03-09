@@ -13,6 +13,7 @@ import { Form2Cabe } from './pages/forms/Form2Cabe';
 import { Form3Suhu } from './pages/forms/Form3Suhu';
 import { Form4Tester } from './pages/forms/Form4Tester';
 import { Form5Return } from './pages/forms/Form5Return';
+import { Form6DataLogger } from './pages/forms/Form6DataLogger';
 import { initDB } from './utils/db';
 import { Page, FormType, ToastMsg } from './types';
 
@@ -58,6 +59,7 @@ export const App: React.FC = () => {
         case 'suhu_equipment': return <Form3Suhu {...formProps} />;
         case 'tester_bahan': return <Form4Tester {...formProps} />;
         case 'return_barang': return <Form5Return {...formProps} />;
+        case 'suhu_datalogger': return <Form6DataLogger {...formProps} />;
       }
     }
     switch (page) {
