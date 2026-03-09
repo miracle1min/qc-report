@@ -14,6 +14,7 @@ import { Form3Suhu } from './pages/forms/Form3Suhu';
 import { Form4Tester } from './pages/forms/Form4Tester';
 import { Form5Return } from './pages/forms/Form5Return';
 import { Form6DataLogger } from './pages/forms/Form6DataLogger';
+import { PhotoGridPage } from './pages/PhotoGridPage';
 import { initDB } from './utils/db';
 import { Page, FormType, ToastMsg } from './types';
 
@@ -65,7 +66,8 @@ export const App: React.FC = () => {
     switch (page) {
       case 'schedule': return <SchedulePage showToast={showToast} />;
       case 'notes': return <NotesPage showToast={showToast} />;
-      case 'menu': return <MainMenu onOpenForm={openForm} />;
+      case 'menu': return <MainMenu onOpenForm={openForm} onNavigate={navigate} />;
+      case 'photo_grid': return <PhotoGridPage onBack={() => navigate('menu')} showToast={showToast} />;
       case 'history': return <HistoryPage showToast={showToast} onEdit={openForm} />;
       case 'settings': return <SettingsPage showToast={showToast} />;
     }

@@ -1,4 +1,4 @@
-export type Page = 'schedule' | 'notes' | 'menu' | 'history' | 'settings';
+export type Page = 'schedule' | 'notes' | 'menu' | 'history' | 'settings' | 'photo_grid';
 
 export type FormType = 'sortir_bawang' | 'cabe_giling' | 'suhu_equipment' | 'tester_bahan' | 'return_barang' | 'suhu_datalogger';
 

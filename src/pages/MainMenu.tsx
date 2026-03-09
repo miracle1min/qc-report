@@ -1,9 +1,10 @@
 import React from 'react';
-import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ThermometerSnowflake, ChevronRight } from 'lucide-react';
-import { FormType } from '../types';
+import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ThermometerSnowflake, ChevronRight, LayoutGrid } from 'lucide-react';
+import { FormType, Page } from '../types';
 
 interface Props {
   onOpenForm: (form: FormType) => void;
+  onNavigate?: (page: Page) => void;
 }
 
 const MENU_ITEMS: { type: FormType; icon: React.ReactNode; title: string; subtitle: string; gradient: string; accentColor: string }[] = [
@@ -57,7 +58,7 @@ const MENU_ITEMS: { type: FormType; icon: React.ReactNode; title: string; subtit
   },
 ];
 
-export const MainMenu: React.FC<Props> = ({ onOpenForm }) => {
+export const MainMenu: React.FC<Props> = ({ onOpenForm, onNavigate }) => {
   return (
     <div style={{ padding: '16px 16px 20px' }}>
       {/* ── Section Label ── */}
@@ -176,6 +177,88 @@ export const MainMenu: React.FC<Props> = ({ onOpenForm }) => {
             </div>
           );
         })}
+      </div>
+
+      {/* ── Tools Section ── */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        marginTop: 24,
+        marginBottom: 14,
+        paddingLeft: 2,
+      }}>
+        <div style={{
+          width: 3,
+          height: 16,
+          borderRadius: 2,
+          background: 'linear-gradient(180deg, #ff2bd6, #ffaa00)',
+        }} />
+        <span style={{
+          fontSize: 12,
+          fontWeight: 700,
+          color: 'rgba(255,255,255,0.5)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+        }}>
+          Tools
+        </span>
+      </div>
+
+      <div
+        className="menu-card-v2"
+        onClick={() => onNavigate?.('photo_grid')}
+        style={{
+          background: 'linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(168,85,247,0.02) 100%)',
+          borderRadius: 16,
+          padding: '20px 16px 18px',
+          cursor: 'pointer',
+          position: 'relative',
+          overflow: 'hidden',
+          border: '1px solid rgba(168,85,247,0.12)',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 14,
+        }}
+      >
+        {/* Glow */}
+        <div style={{
+          position: 'absolute',
+          top: -20,
+          right: -20,
+          width: 60,
+          height: 60,
+          background: 'rgba(168,85,247,0.15)',
+          borderRadius: '50%',
+          filter: 'blur(20px)',
+          pointerEvents: 'none',
+        }} />
+        {/* Icon */}
+        <div style={{
+          width: 42,
+          height: 42,
+          borderRadius: 12,
+          background: 'rgba(168,85,247,0.1)',
+          border: '1px solid rgba(168,85,247,0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'rgba(168,85,247,1)',
+          flexShrink: 0,
+        }}>
+          <LayoutGrid size={22} strokeWidth={1.8} />
+        </div>
+        {/* Text */}
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: 'rgba(255,255,255,0.92)' }}>
+            📸 Photo Grid
+          </div>
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontWeight: 500, marginTop: 2 }}>
+            Upload foto → Grid 3 kolom → Download
+          </div>
+        </div>
+        <ChevronRight size={16} style={{ color: 'rgba(168,85,247,0.35)' }} />
       </div>
 
       {/* ── Footer hint ── */}
