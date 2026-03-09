@@ -17,10 +17,18 @@ const EQUIPMENT_LIST = [
 
 type EquipmentKey = typeof EQUIPMENT_LIST[number]['key'];
 
+interface TempData {
+  min: string;
+  max: string;
+  avg: string;
+}
+
+const emptyTemp = (): TempData => ({ min: '', max: '', avg: '' });
+
 export const Form6DataLogger: React.FC<FormProps> = ({ onBack, showToast, editId }) => {
   const [shift, setShift] = useState('');
-  const [temps, setTemps] = useState<Record<EquipmentKey, string>>(
-    () => Object.fromEntries(EQUIPMENT_LIST.map(e => [e.key, ''])) as Record<EquipmentKey, string>
+  const [temps, setTemps] = useState<Record<EquipmentKey, TempData>>(
+    () => Object.fromEntries(EQUIPMENT_LIST.map(e => [e.key, emptyTemp()])) as Record<EquipmentKey, TempData>
   );
   const [keterangan, setKeterangan] = useState<string[]>(['']);
   const [output, setOutput] = useState('');
@@ -40,8 +48,8 @@ export const Form6DataLogger: React.FC<FormProps> = ({ onBack, showToast, editId
     }
   }, [editId]);
 
-  const updateTemp = (key: EquipmentKey, value: string) => {
-    setTemps(prev => ({ ...prev, [key]: value }));
+  const updateTemp = (key: EquipmentKey, field: keyof TempData, value: string) => {
+    setTemps(prev => ({ ...prev, [key]: { ...prev[key], [field]: value } }));
   };
 
   const addKet = () => setKeterangan(prev => [...prev, '']);
@@ -52,9 +60,12 @@ export const Form6DataLogger: React.FC<FormProps> = ({ onBack, showToast, editId
     if (!shift) { showToast('Pilih Shift dulu', 'error'); return; }
 
     const equipLines = EQUIPMENT_LIST.map(eq => {
-      const val = temps[eq.key] || '-';
-      return `${eq.emoji} ${eq.label} : ${val}°C`;
-    }).join('\n');
+      const t = temps[eq.key];
+      const minVal = t.min || '-';
+      const maxVal = t.max || '-';
+      const avgVal = t.avg || '-';
+      return `${eq.emoji} *${eq.label}*\nMin : ${minVal}°C\nMax : ${maxVal}°C\nAvg : ${avgVal}°C`;
+    }).join('\n\n');
 
     const ketList = keterangan.filter(k => k.trim()).map(k => `• ${k}`).join('\n');
 
@@ -94,16 +105,53 @@ export const Form6DataLogger: React.FC<FormProps> = ({ onBack, showToast, editId
 
         {/* Equipment Inputs */}
         {EQUIPMENT_LIST.map(eq => (
-          <div key={eq.key}>
-            <label className="form-label">{eq.emoji} {eq.label} (°C)</label>
-            <input
-              className="cyber-input"
-              type="number"
-              step="0.1"
-              value={temps[eq.key]}
-              onChange={e => updateTemp(eq.key, e.target.value)}
-              placeholder="0.0"
-            />
+          <div key={eq.key} style={{
+            background: 'rgba(0,255,255,0.03)',
+            border: '1px solid rgba(0,255,255,0.15)',
+            borderRadius: 10,
+            padding: '12px 14px',
+          }}>
+            <label className="form-label" style={{ fontSize: 15, marginBottom: 10 }}>
+              {eq.emoji} {eq.label}
+            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+              <div>
+                <label style={{ fontSize: 11, color: '#8af', display: 'block', marginBottom: 4, fontWeight: 600 }}>Min (°C)</label>
+                <input
+                  className="cyber-input"
+                  type="number"
+                  step="0.1"
+                  value={temps[eq.key].min}
+                  onChange={e => updateTemp(eq.key, 'min', e.target.value)}
+                  placeholder="0.0"
+                  style={{ padding: '8px 8px', fontSize: 14, textAlign: 'center' }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 11, color: '#fa8', display: 'block', marginBottom: 4, fontWeight: 600 }}>Max (°C)</label>
+                <input
+                  className="cyber-input"
+                  type="number"
+                  step="0.1"
+                  value={temps[eq.key].max}
+                  onChange={e => updateTemp(eq.key, 'max', e.target.value)}
+                  placeholder="0.0"
+                  style={{ padding: '8px 8px', fontSize: 14, textAlign: 'center' }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 11, color: '#af8', display: 'block', marginBottom: 4, fontWeight: 600 }}>Avg (°C)</label>
+                <input
+                  className="cyber-input"
+                  type="number"
+                  step="0.1"
+                  value={temps[eq.key].avg}
+                  onChange={e => updateTemp(eq.key, 'avg', e.target.value)}
+                  placeholder="0.0"
+                  style={{ padding: '8px 8px', fontSize: 14, textAlign: 'center' }}
+                />
+              </div>
+            </div>
           </div>
         ))}
 
