@@ -14,6 +14,7 @@ import { Form3Suhu } from './pages/forms/Form3Suhu';
 import { Form4Tester } from './pages/forms/Form4Tester';
 import { Form5Return } from './pages/forms/Form5Return';
 import { Form6DataLogger } from './pages/forms/Form6DataLogger';
+import { Form7Prepare } from './pages/forms/Form7Prepare';
 import { PhotoGridPage } from './pages/PhotoGridPage';
 import { initDB } from './utils/db';
 import { Page, FormType, ToastMsg } from './types';
@@ -61,6 +62,7 @@ export const App: React.FC = () => {
         case 'tester_bahan': return <Form4Tester {...formProps} />;
         case 'return_barang': return <Form5Return {...formProps} />;
         case 'suhu_datalogger': return <Form6DataLogger {...formProps} />;
+        case 'prepare': return <Form7Prepare {...formProps} />;
       }
     }
     switch (page) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ThermometerSnowflake, ChevronRight, LayoutGrid } from 'lucide-react';
+import { ClipboardList, Flame, Thermometer, TestTubes, PackageX, ThermometerSnowflake, ChefHat, ChevronRight, LayoutGrid } from 'lucide-react';
 import { FormType, Page } from '../types';
 
 interface Props {
@@ -55,6 +55,14 @@ const MENU_ITEMS: { type: FormType; icon: React.ReactNode; title: string; subtit
     subtitle: 'Chiller, Freezer & Cold Storage',
     gradient: 'linear-gradient(135deg, rgba(100,180,255,0.12) 0%, rgba(100,180,255,0.02) 100%)',
     accentColor: 'rgba(100,180,255,0.6)',
+  },
+  {
+    type: 'prepare',
+    icon: <ChefHat size={26} strokeWidth={1.8} />,
+    title: 'Report Prepare',
+    subtitle: 'Preparean Harian',
+    gradient: 'linear-gradient(135deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.02) 100%)',
+    accentColor: 'rgba(34,197,94,0.6)',
   },
 ];
 

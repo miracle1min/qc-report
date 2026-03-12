@@ -1,6 +1,6 @@
 export type Page = 'schedule' | 'notes' | 'menu' | 'history' | 'settings' | 'photo_grid';
 
-export type FormType = 'sortir_bawang' | 'cabe_giling' | 'suhu_equipment' | 'tester_bahan' | 'return_barang' | 'suhu_datalogger';
+export type FormType = 'sortir_bawang' | 'cabe_giling' | 'suhu_equipment' | 'tester_bahan' | 'return_barang' | 'suhu_datalogger' | 'prepare';
 
 export const FORM_LABELS: Record<FormType, string> = {
   sortir_bawang: 'Report Sortir Bawang Goreng',
@@ -9,6 +9,7 @@ export const FORM_LABELS: Record<FormType, string> = {
   tester_bahan: 'Tester Bahan & Produk Sisa Semalam',
   return_barang: 'Form Return Barang',
   suhu_datalogger: 'Suhu Data Logger (°C)',
+  prepare: 'Report Preparean',
 };
 
 export const SHIFT_OPTIONS = ['Opening', 'Middle', 'Closing', 'Midnight'] as const;
