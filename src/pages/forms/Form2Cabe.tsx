@@ -39,7 +39,9 @@ export const Form2Cabe: React.FC<FormProps> = ({ onBack, showToast, editId }) =>
   const generate = () => {
     if (!shift) { showToast('Pilih Shift dulu', 'error'); return; }
     const tutupLabel = pakaiTutup ? 'Pakai Tutup' : 'Tanpa Tutup';
-    const text = `*_REPORT CABE GILING_*\n\n🕐 Shift : ${shift}\n📅 Kode Produksi : ${formatDateTimeInput(kodeProduksi)}\n⚖️ Berat Timbang : ${beratKotor || '-'} gram (${tutupLabel})\n📐 Potongan Wadah : ${tare} gram\n✅ Berat Bersih : ${beratKotor ? beratBersih : '-'} gram\n🔍 Temuan QC :\n  ${temuan || '-'}\n${reportFooter()}`;
+    const fmt = (n: number) => n.toLocaleString('id-ID');
+    const kode = kodeProduksi ? formatDateTimeInput(kodeProduksi) : '-';
+    const text = `📋 *Report Cabe Giling*\n🗓️ ${kode} • Shift ${shift}\n\n⚖️ Timbang : ${beratKotor ? fmt(Number(beratKotor)) : '-'} g\n🫙 Wadah    : -${tare} g (${tutupLabel})\n✅ Bersih   : ${beratKotor ? fmt(beratBersih) : '-'} g\n\n🔍 Temuan: ${temuan || '-'}\n${reportFooter()}`;
     setOutput(text);
     showToast('Report generated!', 'success');
   };
