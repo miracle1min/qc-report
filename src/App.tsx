@@ -3,6 +3,8 @@ import React, { useState, useCallback } from 'react';
 import { BottomNav } from './components/BottomNav';
 import { AppHeader } from './components/AppHeader';
 import { ToastContainer } from './components/Toast';
+import { UpdateBanner } from './components/UpdateBanner';
+import { usePWA } from './hooks/usePWA';
 import { SchedulePage } from './pages/SchedulePage';
 import { NotesPage } from './pages/NotesPage';
 import { MainMenu } from './pages/MainMenu';
@@ -27,6 +29,7 @@ export const App: React.FC = () => {
   const [activeForm, setActiveForm] = useState<FormType | null>(null);
   const [editReportId, setEditReportId] = useState<string | null>(null);
   const [toasts, setToasts] = useState<ToastMsg[]>([]);
+  const { needRefresh, canInstall, updateApp, installApp, dismissUpdate } = usePWA();
 
   const showToast = useCallback((message: string, type: ToastMsg['type'] = 'success') => {
     const id = crypto.randomUUID();
@@ -71,13 +74,14 @@ export const App: React.FC = () => {
       case 'menu': return <MainMenu onOpenForm={openForm} onNavigate={navigate} />;
       case 'photo_grid': return <PhotoGridPage onBack={() => navigate('menu')} showToast={showToast} />;
       case 'history': return <HistoryPage showToast={showToast} onEdit={openForm} />;
-      case 'settings': return <SettingsPage showToast={showToast} />;
+      case 'settings': return <SettingsPage showToast={showToast} canInstall={canInstall} installApp={installApp} />;
     }
   };
 
   return (
     <div className="cyber-app" style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden' }}>
-      <AppHeader />
+      <UpdateBanner show={needRefresh} onUpdate={updateApp} onDismiss={dismissUpdate} />
+      <AppHeader canInstall={canInstall} installApp={installApp} />
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: activeForm ? 0 : 64 }}>
         <div className="page-enter" key={activeForm || page}>
           {renderContent()}

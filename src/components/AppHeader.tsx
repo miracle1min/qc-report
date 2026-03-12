@@ -1,7 +1,12 @@
 import React from 'react';
-import { Zap } from 'lucide-react';
+import { Zap, Download } from 'lucide-react';
 
-export const AppHeader: React.FC = () => (
+interface Props {
+  canInstall?: boolean;
+  installApp?: () => Promise<void>;
+}
+
+export const AppHeader: React.FC<Props> = ({ canInstall, installApp }) => (
   <div style={{
     position: 'sticky',
     top: 0,
@@ -57,25 +62,47 @@ export const AppHeader: React.FC = () => (
       </div>
     </div>
 
-    {/* Right — Tagline badge */}
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 5,
-      padding: '3px 10px',
-      borderRadius: 20,
-      background: 'rgba(255,43,214,0.06)',
-      border: '1px solid rgba(255,43,214,0.12)',
-    }}>
-      <span style={{
-        fontSize: 9,
-        color: 'rgba(255,43,214,0.6)',
-        fontWeight: 700,
-        letterSpacing: '0.04em',
-        textTransform: 'uppercase',
+    {/* Right — Install button + Tagline badge */}
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      {canInstall && (
+        <button
+          onClick={installApp}
+          style={{
+            padding: '5px 8px',
+            borderRadius: 8,
+            background: 'rgba(0,247,255,0.1)',
+            border: '1px solid rgba(0,247,255,0.2)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+            color: '#00f7ff',
+            fontSize: 10,
+            fontWeight: 700,
+          }}
+        >
+          <Download size={12} /> Install
+        </button>
+      )}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 5,
+        padding: '3px 10px',
+        borderRadius: 20,
+        background: 'rgba(255,43,214,0.06)',
+        border: '1px solid rgba(255,43,214,0.12)',
       }}>
-        App by Marko
-      </span>
+        <span style={{
+          fontSize: 9,
+          color: 'rgba(255,43,214,0.6)',
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+        }}>
+          App by Marko
+        </span>
+      </div>
     </div>
   </div>
 );

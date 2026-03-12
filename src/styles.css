@@ -583,3 +583,8 @@ textarea.cyber-input {
   color: var(--cyber-neon);
 }
 .filter-pill:active { border-color: var(--cyber-neon); }
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

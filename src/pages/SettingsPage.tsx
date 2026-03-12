@@ -6,9 +6,11 @@ import { getSetting, setSetting, exportAllData, importAllData, clearAllData } fr
 
 interface Props {
   showToast: (msg: string, type?: ToastMsg['type']) => void;
+  canInstall?: boolean;
+  installApp?: () => Promise<void>;
 }
 
-export const SettingsPage: React.FC<Props> = ({ showToast }) => {
+export const SettingsPage: React.FC<Props> = ({ showToast, canInstall, installApp }) => {
   const [scheduleUrl, setScheduleUrl] = useState('');
   const [urlSaved, setUrlSaved] = useState(false);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
@@ -125,6 +127,21 @@ export const SettingsPage: React.FC<Props> = ({ showToast }) => {
           </div>
         </div>
 
+        {canInstall && (
+          <div className="glass-card" style={{ padding: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+              <Download size={18} color="#00f7ff" />
+              <span style={{ fontSize: 15, fontWeight: 600 }}>Install App</span>
+            </div>
+            <p className="muted-text" style={{ fontSize: 12, marginBottom: 12 }}>
+              Install QC Report di home screen untuk akses cepat & offline mode
+            </p>
+            <button className="btn-neon" onClick={installApp}>
+              <Download size={18} /> Install ke Home Screen
+            </button>
+          </div>
+        )}
+
         <div className="glass-card" style={{ padding: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
             <Info size={18} className="neon-text" />
@@ -133,7 +150,7 @@ export const SettingsPage: React.FC<Props> = ({ showToast }) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
               <span className="muted-text">App Version</span>
-              <span className="neon-text" style={{ fontWeight: 600 }}>v1.1.0</span>
+              <span className="neon-text" style={{ fontWeight: 600 }}>v1.2.0</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
               <span className="muted-text">Platform</span>
